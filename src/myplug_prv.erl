@@ -37,5 +37,15 @@ format_error(Reason) ->
       State :: rebar_state:t(),
       Res :: binary().
 get_app_name(State) ->
-    AppInfo = rebar3_generate_sys_config_lib:get_app_info(State),
+    AppInfo = get_app_info(State),
     rebar_app_info:name(AppInfo).
+
+get_app_info(State) ->
+    [Info | _] =
+        case rebar_state:current_app(State) of
+            undefined ->
+                rebar_state:project_apps(State);
+            I ->
+                [I]
+        end,
+    Info.
