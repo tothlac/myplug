@@ -25,6 +25,9 @@ init(State) ->
 
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
+    io:format("~p ~p do: '~p' ~n", [?MODULE, ?LINE, do]),
+    _State1 = rebar_prv_app_discovery:do(State),
+    io:format("~p ~p rebar_prv_app_discovery: '~p' ~n", [?MODULE, ?LINE, rebar_prv_app_discovery]),
     App = get_app_name(State),
     io:format("~p ~p App: '~p' ~n", [?MODULE, ?LINE, App]),
     {ok, State}.
